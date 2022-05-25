@@ -22,7 +22,8 @@ class AuthMiddleware(BaseMiddleware):
                 user.full_name = full_name
                 user.save(update_fields=['full_name'])
             is_new_user = False
-        except Exception:
+        except Exception as e:
+            print(e)
             user = TelegramUser.objects.create(
                 id=id,
                 full_name=full_name

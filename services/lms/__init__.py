@@ -1,3 +1,4 @@
+from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 import time
 import requests
@@ -31,7 +32,14 @@ class _LMS:
                 await self.message.answer("Successfully loged-in. New session started.")
     
     def login(self) -> bool:
-        driver = webdriver.Chrome()
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_prefs = {}
+        chrome_options.experimental_options["prefs"] = chrome_prefs
+        chrome_prefs["profile.default_content_settings"] = {"images": 2}
+        driver = webdriver.Chrome(options=chrome_options)
         driver.get(LOGIN_URL)
         elem = driver.find_element_by_css_selector("input#login")
         for ch in self.user.login:
@@ -45,6 +53,7 @@ class _LMS:
         self.set_cookies(cookies)
         self.user.cookies = cookies
         self.user.save(update_fields=['cookies'])
+        driver.close()
 
     def get(self, url=None):
         url = url or self.target

@@ -1,7 +1,7 @@
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 
 CHANGE_LOGIN_TEXT = "Change login"
-CHANGE_PASSWORD_TEXT = "Change login"
+CHANGE_PASSWORD_TEXT = "Change password"
 
 
 btn = ReplyKeyboardMarkup(

@@ -37,7 +37,7 @@ async def set_login_settings_handler(message: types.Message, state):
 
 @dp.message_handler(IsChatPrivate(), text=CHANGE_PASSWORD_TEXT)
 async def password_settings_handler(message: types.Message):
-    await Settings.login.set()
+    await Settings.pasaword.set()
     await message.answer(
         "Enter password:"
     )
@@ -45,9 +45,9 @@ async def password_settings_handler(message: types.Message):
 
 @dp.message_handler(IsChatPrivate(), state=Settings.pasaword)
 async def set_password_settings_handler(message: types.Message, state):
-    pasaword = message.text
-    message.user.pasaword = pasaword
-    message.user.save(update_fields=['pasaword'])
+    password = message.text
+    message.user.password = password
+    message.user.save(update_fields=['password'])
     await state.finish()
     await message.answer(
         "Done✅",

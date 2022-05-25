@@ -56,7 +56,7 @@ async def get_formated_text(message) -> str:
     text = [
         f"🕵️‍♂️Achieved points: <b>{data['stats']['achieved']}</b>\n"
         f"💯Max points: <b>{data['stats']['max']}</b>\n"
-        f'{"✅" if int(data["stats"]["rating"][:-1])>=60 else "❌"}Rayting: <b>{data["stats"]["rating"]}</b>\n'
+        f'{"✅" if float(data["stats"]["rating"][:-1])>=60 else "❌"}Rayting: <b>{data["stats"]["rating"]}</b>\n'
         f"🇺🇿Grade: <b>{data['stats']['grade']}</b>\n"
     ] + [text]
     return text
