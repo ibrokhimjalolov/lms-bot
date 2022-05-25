@@ -64,7 +64,8 @@ class _LMS:
             self.session.cookies.set(
                 c['name'], c['value']
             )
-    
+
+
     def is_authenticated(self) -> bool:
         return self.session.get(self.target).url == self.target
     
