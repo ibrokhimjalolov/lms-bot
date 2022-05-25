@@ -7,6 +7,11 @@ from .consts import HEADERS
 
 LOGIN_URL = "https://lms.tuit.uz/auth/login"
 HOME_URL = "https://lms.tuit.uz/dashboard/news"
+http_proxy = "http://195.158.18.236"
+
+proxies = {
+      "http": http_proxy,
+}
 
 
 class _LMS:
@@ -41,6 +46,7 @@ class _LMS:
         chrome_prefs["profile.default_content_settings"] = {"images": 2}
         driver = webdriver.Chrome(options=chrome_options)
         driver.get(LOGIN_URL)
+        print(driver.title)
         elem = driver.find_element_by_css_selector("input#login")
         for ch in self.user.login:
             elem.send_keys(ch)
@@ -67,7 +73,7 @@ class _LMS:
 
 
     def is_authenticated(self) -> bool:
-        return self.session.get(self.target).url == self.target
+        return self.session.get(self.target, proxies=proxies).url == self.target
     
     def close(self):
         try:
